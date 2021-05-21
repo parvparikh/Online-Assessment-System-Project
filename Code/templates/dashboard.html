@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dashboard</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+	<div style="margin-top: 350px">
+<center>
+	<a href="/tlogin">Teacher Login</a>
+	<br>
+	<br>
+	<a href="/slogin">Student Login</a><br>
+</center>
+</div>
+	
+{% with messages = get_flashed_messages() %}
+ 	{% if messages %}
+ 		{% for message in messages %}
+
+
+ 			<script type="text/javascript">
+ 				alert("{{message}}")
+ 			</script>
+
+ 		{% endfor %}
+ 	{% endif %}
+{% endwith %}  
+</body>
+</html>

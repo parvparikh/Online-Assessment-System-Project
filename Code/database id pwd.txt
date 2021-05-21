@@ -1,0 +1,71 @@
+database pwd: root@123
+username : Hiten
+
+https://www.youtube.com/watch?v=RL9nGmv3uSU
+
+
+arn:aws:iam::595618970321:role/EC2InstanceProfileRole
+
+
+{
+  "Id": "Policy1613728441566",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1613728429106",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::17cp050/*",
+      "Principal": {
+        "AWS": [
+          "arn:aws:iam::595618970321:role/EC2InstanceProfileRole"
+        ]
+      }
+    }
+  ]
+}
+
+
+
+{
+  "Id": "Policy1613729564939",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1613729474537",
+      "Action": [
+        "s3:GetObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::17cp050/*",
+      "Principal": "*"
+    },
+    {
+      "Sid": "Stmt1613729563181",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject"
+      ],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::17cp050/*",
+      "Principal": {
+        "AWS": [
+          "/*"
+        ]
+      }
+    }
+  ]
+}
+
+
+
+This sample text file is used to illustrate the use of versioning in an Amazon S3 bucket.
+
+Make it a great day!
+
+
+
+https://17cp050.s3-us-west-2.amazonaws.com/sample-file.txt

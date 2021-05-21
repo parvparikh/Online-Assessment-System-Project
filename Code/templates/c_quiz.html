@@ -1,0 +1,197 @@
+<HTML>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+input[type=text]{
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+select,option {
+width: 50%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 20px;
+}
+
+input[type=submit] {
+width: 50%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+#searchq {
+width: 50%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+
+
+
+#two {
+width: 100%;
+background-color: red;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+#two:hover {
+background-color: #8b0000;
+}
+
+input[type=submit]:hover {
+background-color: #45a049;
+}
+
+div {
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+
+</style>
+</head>
+<BODY>
+<form method="POST" action="">
+    <center>
+    <H1>Select Courses</H1> <br>
+  <button> <a href="/qbank">Question bank</a></button><br> 
+    <select name="course" id="course"0>
+    {% for row in courses %}
+  	<option value={{row.0}} >{{row.0}}</option>
+  	{% endfor %}
+	</select>
+
+<p>{{c}}</p>
+    <input type = "submit" id="searchq" name="course" value="Search Question Bank">
+    </form>
+    <form method="POST"><input width="50%" type="submit" name="genq" value="Generate quiz"></form> 
+ <br>
+ <table border="1" width="50%" id='customers'>
+
+{% for row in ques1 %}
+<tr>
+	<th colspan="2">Que {{row.0}}: {{row.4}}</th>
+	<th>( {{row.3}} ) [{{row.12}}]</th>
+	
+	
+</tr>
+<tr>
+	<td>A) {{row.6}}</td>
+	<td>B) {{row.7}}</td>
+	<th> <form method="POST" action=""><input type="hidden" name="qbid" value={{row.0}}><input type = "submit" name="add_que" value="add question"></form></th>
+
+</tr><tr>
+	<td>C) {{row.8}}</td>
+	<td>D) {{row.9}}</td>
+	<th> <form method="POST" action=""><input type="hidden" name="qbid" value={{row.0}}><input type = "submit" name="remove_que" value="remove question" id="two"></form></th>
+</tr>
+<tr>
+	<td colspan="3">ans {{row.0}}: {{row.11}}</td>
+</tr>
+{% endfor %}
+
+
+
+{% for row in ques2 %}
+<tr>
+	<th colspan="2">Que {{row.0}}: {{row.4}}</th>
+	<th>( {{row.3}} ) [{{row.12}}]</th>
+	
+	
+</tr>
+<tr>
+	<td>A) {{row.6}}</td>
+	<td>B) {{row.7}}</td>
+	<th> <form method="POST" action=""><input type="hidden" name="qbid" value={{row.0}}><input type = "submit" name="add_que" value="add question"></form></th>
+
+</tr><tr>
+	<td>C) {{row.8}}</td>
+	<td>D) {{row.9}}</td>
+	<th> <form method="POST" action=""><input type="hidden" name="qbid" value={{row.0}}><input type = "submit" name="remove_que" value="remove question" id="two"></form></th>
+</tr>
+<tr>
+	<td colspan="3">ans {{row.0}}: {{row.10}}</td>
+</tr>
+{% endfor %}
+
+
+
+{% for row in ques3 %}
+<tr>
+	<th colspan="2">Que {{row.0}}: {{row.4}}</th>
+	<th>( {{row.3}} ) [{{row.12}}]</th>
+	
+	
+</tr>
+<tr>
+	<td rowspan="2" colspan="2">ans {{row.0}}: {{row.10}}</td>
+	<th> <form method="POST" action=""><input type="hidden" name="qbid" value={{row.0}}><input type = "submit" name="add_que" value="add question"></form></th>
+
+</tr><tr>
+	<th> <form method="POST" action=""><input type="hidden" name="qbid" value={{row.0}}><input type = "submit" name="remove_que" value="remove question" id="two"></form></th>
+</tr>
+
+{% endfor %}
+
+
+ 	
+ </table>
+    </center>
+
+
+</center>
+</table>
+<th> 
+<table border="1" width="50%" id='customers'>
+	
+	{% for row in que %}
+
+	<tr>
+		
+		<th colspan="2">Selected {{row.0}}</th>
+
+	</tr>
+
+	{% endfor %}
+
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,25 @@
+<HTML>
+<BODY>
+<form method="POST" action="">
+    <center>
+    <H1>Enter your Loginnnnn Details</H1> <br>
+    Id <input color="blue" type = "text" name= "tid" /> <br>
+    Password <input type = "Password" name = "tpwd" /> <br>
+    Login <input type = "submit">
+    <a href="/createacc">Create Account</a>
+    </center>
+
+</form>
+
+{% with messages = get_flashed_messages() %}  
+         {% if messages %}  
+               {% for message in messages %}  
+                    <p>{{ message }}</p>  
+               {% endfor %}  
+         {% endif %}  
+      {% endwith %}  
+
+</center>
+</table>
+</BODY>
+</HTML>

@@ -1,0 +1,137 @@
+<HTML>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+input[type=text]{
+width: 70%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+select,option {
+width: 50%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 20px;
+}
+
+input[type=submit] {
+width: 100%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+#searchq {
+width: 50%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+
+
+
+#two {
+width: 100%;
+background-color: red;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+#two:hover {
+background-color: #8b0000;
+}
+
+input[type=submit]:hover {
+background-color: #45a049;
+}
+
+div {
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+
+</style>
+</head>
+<BODY><center>
+<form method="POST" action="">
+    
+    <H1>Select Courses</H1> <br>
+  <button> <a href="/qbank">Question bank</a></button><br> 
+    <select name="course" id="course"0>
+    	<option value="NA" >Choose a Course</option>
+    {% for row in courses %}
+  	<option value={{row.0}} >{{row.0}}</option>
+  	{% endfor %}
+	</select>
+
+<p>{{c}}</p>
+    <input type = "submit" id="searchq" name="course" value="Search Question Bank">
+    </form>
+ <br>
+<table border="1">
+	<tr>
+	<td>Apply</td>
+	<td>Create</td>
+	<td>Evaluate</td>
+	<td>Analyse </td>
+	<td>Remember </td>
+	<td>Understand </td>
+	</tr>
+
+	<tr>
+{%for row in blooms %}
+<td>{{row.1}}</td>
+{% endfor %}
+	</tr>
+	
+
+</table>
+
+<form method="POST" action="">
+	Remember : <input type="text" name="r" value="0"><br>
+ Understand : <input type="text" name="u" value="0"><br>
+Apply : <input type="text" name="a" value="0"><br>
+Analyse : <input type="text" name="n" value="0"><br>
+Evaluate : <input type="text" name="e" value="0"><br>
+ Create : <input type="text" name="c" value="0"><br>
+<input type="hidden" name="co" value="{{c}}">
+<button><input type="submit" name="auto" value="Generate"></button>
+  </form>
+</BODY>
+</HTML>

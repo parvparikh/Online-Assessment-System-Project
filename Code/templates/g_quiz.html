@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+input[type=text]{
+width: 50%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+select,option {
+width: 50%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 20px;
+}
+
+input[type=submit] {
+width: 50%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+#two {
+width: 50%;
+background-color: red;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+#two:hover {
+background-color: #8b0000;
+}
+
+input[type=submit]:hover {
+background-color: #45a049;
+}
+
+div {
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+
+</style>
+</head>
+<body>
+<form method="POST" action="">
+    <center>
+    <label for="quizid"><b>Quiz_Id</b></label>
+    <input type="text" placeholder="Enter Quiz Id" name="quizid" required><br>
+
+    <label for="quizname"><b>Quiz_Name</b></label>
+    <input type="text" placeholder="Enter Quiz Name" name="quizname" required><br>
+    <label for="quizid"><b>Quiz_date</b></label>
+    <input type="date" placeholder="Enter Quiz date" id="quizdate" name="quizdate" required><br>
+    <label for="quizstime"><b>Quiz_Start_time</b></label>
+    <input type="time" placeholder="Enter Quiz time" name="quizstime" id="quizstime" onchange="time()" on required><br>
+    <label for="quizetime"><b>Quiz_End_time</b></label>
+    <input type="time" placeholder="Enter Quiz time" name="quizetime" id="quizetime" onchange="time()" required><br>
+    <label for="totaltime"><b>Total_time</b></label>
+    <input type="text" placeholder="Enter Quiz time" name="quiztime" id="quiztime" value="0 hrs 0 min" readonly required><br>
+
+    <label for="quizid"><b>Quiz_Marks</b></label>
+    <input type="text" placeholder="Enter Quiz date" name="quizmarks" value = {{total}} readonly required><br>
+
+   
+    <button type="submit">Generate</button>
+        <a href="/qbank">Go back to question bank</a>
+<script type="text/javascript">
+function time(){
+
+  var date = document.getElementById("quizdate").value;
+  var s = document.getElementById("quizstime").value;
+  var e = document.getElementById("quizetime").value;
+  s=String(s);
+  e=String(e);
+  var startday = new Date(date);
+  s=s.split(':');
+  startday.setHours(s[0]);
+  startday.setMinutes(s[1]);
+  //startday.setSeconds(s[2]);
+
+  var endday = new Date(date);
+  e=e.split(':');
+  endday.setHours(e[0]);
+  endday.setMinutes(e[1]);
+  //endday.setSeconds(e[2]);
+
+  var diff = (endday.getTime() - startday.getTime()) / 1000;
+
+  if(diff <= 0)
+  {
+    document.getElementById("quiztime").value = "Invalid Interval";
+  }else{
+      var ans = Math.abs(Math.round(diff))
+      var m=ans/60;
+      m=parseInt(m);
+      var s=ans - (60*m);
+      var h=m/60;
+      h=parseInt(h);
+      var m=m - (60*h);
+      document.getElementById("quiztime").value =h +" hrs "+m+" min"+s+" sec";
+  }
+/*
+  var h = e[0] - s[0]  ;
+  var m = e[1] - s[1] ;
+  if(h>=0)
+  {
+    if(h==0 && m>=0)
+    {
+      s[1]=parseInt(s[1])
+      t=(60-s[1])%60;
+      temp=h-1;
+      if(t==0){ temp=h; }
+      if(h==0)
+      { 
+            temp=0; 
+      }
+      while(temp)
+      {
+        temp=temp-1;
+        t=parseInt(t);
+        t=t+60;
+      }
+      e[1] = parseInt(e[1]);
+      t=t+e[1];
+      h=t/60;
+      h=parseInt(h);
+      m=t - (60*h);
+     document.getElementById("quiztime").value =h +" hrs "+m+" min";
+    }
+    else{
+      document.getElementById("quiztime").value = "Invalid Interval";
+    }
+  }else{
+  document.getElementById("quiztime").value = "Invalid Interval";
+  }
+ */
+}
+</script>
+    
+</center>
+</form>
+<center>
+<h1>Questions in quiz</h1>
+
+
+<table border="1" width="50%" id ='customers'>
+
+{% for bow in ques %}
+	{%for row in bow %}
+
+		<tr>
+			<th colspan="2">Que {{row.0}}: {{row.4}}</th>
+			<th>( {{row.3}} )</th>
+		</tr>
+		<tr>
+			<td>A) {{row.5}}</td>
+			<td>B) {{row.6}}</td>
+		</tr><tr>
+			<td>C) {{row.7}}</td>
+			<td>D) {{row.8}}</td>
+		</tr>
+		<tr>
+			<td colspan="2">ans {{row.0}}: {{row.9}}</td>
+		</tr>
+	{% endfor %}
+{% endfor %}
+ 	
+ </table>
+ </center>
+</body>
+</html>

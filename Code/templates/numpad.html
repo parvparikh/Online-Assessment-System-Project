@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Javascript Numpad</title>
+    
+    <!-- (A) LOAD JS + CSS -->
+    <!--
+    <link rel="stylesheet" href="numpad-light.css"/>
+    -->
+    <link rel="stylesheet" href="numpad-dark.css"/>
+    <script src="numpad.js"></script>
+      <style>
+          
+          #a{
+              display: none;
+          }
+      </style>
+  </head>
+  <body onpaste="return false;" onCopy="return false" onCut="return false" onDrag="return false">
+    <!-- (B) INPUT FIELDS -->
+      <div id="a">
+          <h5><b>what is the value of 3/2^2 ?</b></h5>
+          
+          
+          
+     <input  type="text"  id="demoA"/>
+          
+          
+      </div>
+      
+      
+      
+      <br>
+      <br>
+      <button onclick="openFullscreen();">Start Test</button>
+      <button onclick="closeFullscreen();">End Test</button>
+    <br><br>
+    
+    
+    <!-- (C) ATTACH NUMPAD -->
+    <script>
+        
+        document.onkeydown = function(evt) {
+            evt = evt || window.event;
+        if (evt.keyCode == 27) {
+            alert('Esc key pressed.');
+        }
+            else{
+                return false;
+            }
+    };
+        
+        
+        
+        window.addEventListener("load", function(){
+            // BASIC
+            numpad.attach({target: "demoA"});
+      
+      
+        });
+        
+                    var elem = document.documentElement;
+            function openFullscreen() {
+
+              if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+              } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+              } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+              }
+                
+                show();
+            }
+                    
+        
+        
+        
+        function show() {
+              var x = document.getElementById("a");
+
+                x.style.display = "block";
+ 
+                 document.onkeydown = function (e) 
+        {
+            return false;
+        } 
+        }
+
+        
+        
+        function hide() {
+            var x = document.getElementById("a");
+  
+            x.style.display = "none";
+ 
+    
+        }
+
+        
+        function closeFullscreen() {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          } else if (document.webkitExitFullscreen) { /* Safari */
+            document.webkitExitFullscreen();
+          } else if (document.msExitFullscreen) { /* IE11 */
+            document.msExitFullscreen();
+          }
+            hide();
+}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Upload Files</title>
+  </head>
+
+  <body>
+    <div style="margin-top: 350px">
+      <center>
+
+        <h1>Only Upload One CSV file at a Time</h1>
+    <form method="post" enctype="multipart/form-data" action="{{ url_for('upload_csv') }}">
+      <label>Choose files for student</label>
+      <input type="file" name="sfile" value="sfile" multiple />
+      <input type="submit" value="Upload Students" name="submit" />
+      <br>
+      <br>
+      <label>Choose files for teacher</label>
+      <input type="file" name="tfile" multiple />
+      <input type="submit" value="Upload Teachers" name="submit" />
+      <br>
+      <br>
+      <label>Choose files for Courses</label>
+      <input type="file" name="cfile" multiple />
+      <input type="submit" value="Upload Courses" name="submit" />
+    </form>
+    </center>
+    </div>
+
+
+    <!--<script src="upload.js"></script>-->
+<br>
+<br>
+<center> <a href="/" style="margin-top: 150px">Go To Dashboard</a></center>
+
+
+{% with messages = get_flashed_messages() %}  
+         {% if messages %}  
+               {% for message in messages %}  
+                    
+                <script type="text/javascript">
+                  alert("{{message}}");
+                </script>
+               {% endfor %}  
+         {% endif %}  
+    {% endwith %} 
+   
+  </body>
+</html>

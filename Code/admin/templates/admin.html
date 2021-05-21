@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Dashboard</title>
+
+
+	<style type="text/css">
+		
+
+
+
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+
+	</style>
+</head>
+<body>
+	<div style="margin-top: 350px">
+<center>
+	<a href="/student">Student</a>
+	<br>
+	<br>
+	<br>
+	<a href="/teacher">Teacher</a>
+	<br>
+	<br>
+	<br>
+	<a href="/uploadcsv">Upload from csv</a>
+	<!--<a href="/video">video</a>
+	<a href="/bbb">Video Json</a>-->
+</center>
+</div>
+
+
+<!--<div>
+	<center>
+	<h1>Enter Details to display students</h1>
+	</center>
+</div>
+
+<div>
+	<form method="POST" action="">
+    
+        
+    <label for="branch"><b>Enter Branch</b></label>
+    <input type="text" placeholder="Enter branch" name="sbranch" required>
+
+ 
+
+    <label for="sem"><b>Enter semester</b></label>
+    <input type="text" placeholder="Enter semester" name="sem" required>
+      
+      
+    <button type="submit">Search</button>
+  
+    
+ 
+
+</form>
+
+
+</div>
+<br>
+<br>
+<div style="overflow-y: auto;">
+	
+<table border="1"  id="customers">
+	<tr>
+	
+	<th>Student ID</th>
+	<th>Student Name</th>
+	<th>Student Branch</th>
+	<th>Student Sem</th>
+	<th>Action</th>
+</tr>
+
+	{% for row in data %}
+
+			<tr>
+			
+				<td>{{row.0}}</td>
+				<td>{{row.2}}</td>
+				<td>{{row.3}}</td>
+				<td>{{row.4}}</td>
+				<td><form method="POST" action="{{ url_for('remove_student') }}"><input type="hidden" name="sid" value={{row.0}}><input type = "submit" name="Remove student" value="Remove Student"></form></td>
+			</tr>
+
+			
+	
+	{% endfor %}
+
+</table>
+
+</div>
+	{% with messages = get_flashed_messages() %}  
+         {% if messages %}  
+               {% for message in messages %}  
+                    
+                <script type="text/javascript">
+                	alert("{{message}}");
+                </script>
+               {% endfor %}  
+         {% endif %}  
+   	{% endwith %} -->
+
+</body>
+</html>

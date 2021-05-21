@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
+    <link rel="shortcut icon" type="image/x-icon" href="E:/assets/img/favicon.ico">
+    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <link rel="stylesheet" type="text/css" href="E:/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="E:/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="E:/assets/css/select2.min.css">
+<link rel="stylesheet" type="text/css" href="E:/assets/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="E:/assets/css/style.css">
+    <style>
+    p {
+  text-align: center;
+  font-size: 40px;
+  margin-top: 0px;
+}
+    </style>
+</head>
+<body>
+    
+    <script>
+	document.addEventListener("dblclick",()  => {
+
+	document.documentElement.requestFullscreen().catch((e) => { console.log(e);});
+
+	});
+
+document.addEventListener('visibilitychange', function () {
+  // The user leaves the current page.
+  if (document.visibilityState === 'hidden') {
+  	var txt= document.getElementById("name").innerHTML;
+  	t=parseInt(txt)
+  	t=t+1;
+    document.getElementById("name").innerHTML = t;
+  }
+
+}); 
+document.addEventListener('fullscreenchange', (event) => {
+
+  if (document.fullscreenElement) {
+  	document.getElementById("fs").innerHTML = "in";
+    console.log(`Element: ${document.fullscreenElement.id} entered full-screen mode.`);
+  } else {
+
+  	document.documentElement.requestFullscreen().catch((e) => { console.log(e);});
+
+  	document.getElementById("fs").innerHTML = "not in";
+  	var txt= document.getElementById("ft").innerHTML;
+  	t=parseInt(txt)
+  	t=t+1;
+    document.getElementById("ft").innerHTML = t
+    console.log('Leaving full-screen mode.');
+
+  }
+});
+
+
+</script>
+    
+    
+    
+    
+    
+<div class="main-wrapper">
+    <div class="header">
+			<div>
+                <ul class="nav user-menu float-left">
+                <li class="nav-item dropdown d-none d-sm-block">
+                  <h2>Welcome to the TEST</h2>   
+                </li>
+                
+                </ul>
+                <ul class="nav user-menu float-right">
+                <li class="nav-item dropdown d-none d-sm-block">
+                  <h2>Time will be shown here</h2>   
+                </li>
+                
+                </ul>
+            </div>
+        </div>
+    <div class="sidebar" id="sidebar">
+            <div class="sidebar-inner slimscroll">
+                <div id="sidebar-menu" class="sidebar-menu">
+                    
+                   <form method="POST" action="">
+                       <div class="row">
+                    <div class="col-lg-8 offset-lg-2">
+                        <h4 class="page-title">Questions</h4>
+                    </div>
+                </div>
+                {% for i in ids %}
+
+                <button type = "submit" name="select" value="{{i}}" class="btn btn-outline-primary take-btn">{{i}}</button> 
+                {% endfor %}
+                </form>     
+                    
+                </div>
+            </div>
+        </div>
+<div class="page-wrapper">
+    <div class="content">
+
+
+
+<form method="POST" action="">
+	
+	<input type = "submit" name="EndTest" value="End Test">
+	
+</form>
+    
+<div class="row">     	
+<div class="col-lg-8 offset-lg-2">
+	
+	  <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Test Name</label>
+                                        
+                                        
+                                    </div>
+                                </div> 
+                                
+                                 <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Test Marks</label>
+                                        
+                                        
+                                    </div>
+                                </div> <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Test Date</label>
+                                        
+                                        
+                                    </div>
+                                </div>
+                              <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Start & End Time</label>
+                                        
+                                        
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>Test Time</label>
+                                        
+                                        
+                                    </div>
+                                </div> 
+                                
+                                
+                            </div>
+    
+    
+    {% for row in data %}
+	
+		
+	
+    <div class="row">
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>{{row.3}}</label>
+                                        
+                                        
+                                    </div>
+                                </div> 
+                                
+                                 <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label>{{row.5}}</label>
+                                        
+                                        
+                                    </div>
+                                </div> <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input hidden="true" id="date" value="{{row.6}}"><label>{{row.6}}</label>
+                                        
+                                        
+                                    </div>
+                                </div>
+                            
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input hidden="true" id="etime" value="{{row.8}}"><label>{{row.7}} to {{row.8}}</label>
+                                        
+                                        
+                                    </div>
+                                </div> 
+                                 <div class="col-md-2">
+                                    <div class="form-group">
+                                        <input hidden="true" id="etime" value="{{row.8}}"><label>{{row.9}}</label>
+                                        
+                                        
+                                    </div>
+                                </div> 
+                                
+                                
+                            </div>
+
+{% endfor %}
+    </div>
+</div>
+        
+     
+
+<br>
+        <br>
+     
+        
+        
+
+
+
+<form method="POST" action="">
+    
+    
+    
+  
+ 
+
+
+    
+    
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+										<label>Question {{row.10}}:</label>
+										
+									</div>
+                                </div>
+                            <div class="col-md-6">
+                                    <div class="form-group">
+										<label>Marks : {{row.3}}</label>
+										
+									</div>
+                                </div>
+                     
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group">
+										<label>Question</label>
+										<input class="form-control" type="text" value="{{row.4}}" name="qbid" readonly="">
+									</div>
+                                </div>
+                     
+                            </div>
+    
+    
+
+     
+                            <div class="row">
+                                <div class="col-md-10">
+									<div class="form-group">
+                                <label class="display-block">Option A</label>
+								<div class="form-check form-check-inline">
+                                    
+                                    
+                                    <input class="form-check-input" type="radio" id="optA" name="option" value="1"> 
+                                    
+                                    
+									
+									<label class="form-check-label" for="product_active">
+									{{row.5}}
+									</label>
+								</div>
+								
+                            </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+									<div class="form-group">
+                                <label class="display-block">Option B</label>
+								<div class="form-check form-check-inline">
+                                    
+                                    
+                                    <input class="form-check-input" type="radio" id="optB" name="option" value="2"> 
+                                    
+                                    
+									
+									<label class="form-check-label" for="product_active">
+									{{row.6}}
+									</label>
+								</div>
+								
+                            </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+									<div class="form-group">
+                                <label class="display-block">Option C</label>
+								<div class="form-check form-check-inline">
+                                    
+                                    
+                                    <input class="form-check-input" type="radio" id="optC" name="option" value="3"> 
+                                    
+                                    
+									
+									<label class="form-check-label" for="product_active">
+									{{row.7}}
+									</label>
+								</div>
+								
+                            </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+									<div class="form-group">
+                                <label class="display-block">Option D</label>
+								<div class="form-check form-check-inline">
+                                    
+                                    
+                                    <input class="form-check-input" type="radio" id="optD" name="option" value="4"> 
+                                    
+                                    
+									
+									<label class="form-check-label" for="product_active">
+									{{row.8}}
+									</label>
+								</div>
+								
+                            </div>
+                                </div>
+                            </div>
+     
+     
+     
+
+
+<center>
+	<button class="btn btn-primary submit-btn" type = "submit" name="save" id="save" value="{{row.10}} 0" onclick="update()">save & next</button> 
+</center>
+<input hidden="true" value="{{row.10}}" id="hidden">
+	<input hidden="true" value="{{pre}}" id="pre">
+ 	
+
+</form>
+    </div>
+<script type="text/javascript">
+
+	var y = document.getElementById("pre").value;
+	var yi = parseInt(y);
+	switch(yi)
+	{
+		case 1:
+		document.getElementById('optA').checked = true;
+		break;
+
+		case 2:
+		document.getElementById('optB').checked = true;
+		break;
+
+		case 3:
+		document.getElementById('optC').checked = true;
+		break;
+
+		case 4:
+		document.getElementById('optD').checked = true;
+		break;
+
+	}
+
+	function update() {
+	     var ele = document.getElementsByName('option');
+              
+            for(i = 0; i < ele.length; i++) {
+                if(ele[i].checked)
+                {
+                var x = document.getElementById("hidden").value;
+
+                x = x + " " + ele[i].value;
+                document.getElementById("save").value = x;
+                }
+            }
+  	}
+</script>
+ 
+<br><br><br>
+
+
+
+<script>
+
+
+var time = document.getElementById("date").value;
+var t = time.split('-');
+var t1 = t[2].split(' ');
+t[1] = String(t[1]);
+switch(t[1])
+{
+	case "01":
+	t[1] = "Jan";
+	break;
+ 	case "02":
+	t[1] = "Feb";
+	break;
+ 	case "03":
+	t[1] = "Mar";
+	break;
+ 	case "04":
+	t[1] = "Apr";
+	break;
+ 	case "05":
+	t[1] = "May";
+	break;
+ 	case "06":
+	t[1] = "Jun";
+	break;
+ 	case "07":
+	t[1] = "Jul";
+	break;
+ 	case "08":
+	t[1] = "Aug";
+	break;
+ 	case "09":
+	t[1] = "Sep";
+	break;
+ 	case "10":
+	t[1] = "Oct";
+	break;
+ 	case "11":
+	t[1] = "Nov";
+	break;
+ 	case "12":
+	t[1] = "Dec";
+	break;
+ 	
+}
+var et = document.getElementById("etime").value;
+time = t[1] +" "+ t1[0] + " , " + t[0] + " " + et;
+time = String(time);
+time =time + ":00"
+var countDownDate = new Date(time).getTime();
+
+ 
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+ 
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+
+    </div>
+    </div>
+        
+</body>
+</html>

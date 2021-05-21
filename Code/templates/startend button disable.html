@@ -1,0 +1,109 @@
+<form method="POST" action="">
+	
+	<button type = "submit" name="Start Test" id="start" value="Start Test" disabled="true">Start Test</button> 
+
+</form>
+<table>
+	<tr>
+<th><input id="date" value="2021-04-12"></th>
+<th><input id="stime" value="16:51:00"></th>
+<th><input id="etime" value="16:53:00"></th>
+</tr>
+</table>
+<input type="text" name="today" id="td" width="100%">
+    <script type="text/javascript">
+    	window.onload = function(){
+    	document.getElementById("start").disabled = true;
+
+    	var date = document.getElementById("date").value;
+    	var time = document.getElementById("stime").value;
+        var etime = document.getElementById("etime").value;
+    	var startday = new Date(date);
+    	time=time.split(':');
+    	startday.setHours(time[0]);
+    	startday.setMinutes(time[1]);
+    	startday.setSeconds(time[2]);
+
+
+        var endday = new Date(date);
+        etime=etime.split(':');
+        endday.setHours(etime[0]);
+        endday.setMinutes(etime[1]);
+        endday.setSeconds(etime[2]);
+
+
+    	var today = new Date();
+
+        var check = (today.getTime() - endday.getTime()) / 1000;
+        
+        if(check>=0)
+        {
+
+                document.getElementById("td").value = "Test Time Ended";
+        }
+        else{
+        	
+            var diff =(startday.getTime() - today.getTime()) / 1000;
+
+
+        	if(diff < 0)
+        	{
+        		document.getElementById("td").value = "Already Started";
+
+        		setTimeout(function(){  
+           		 var element = document.getElementById("start") ;
+           			 element.disabled = false;
+       				 }, 0);
+        	}
+        	else{
+      		//diff /= 60;
+      		var ans = Math.abs(Math.round(diff))
+      		var m=ans/60;
+    		m=parseInt(m);
+    		var s=ans - (60*m);
+    		var h=m/60;
+    		h=parseInt(h);
+    		var m=m - (60*h);
+        	
+        	msec = ans*1000;
+        	//h+" hrs "+m+" mins" +  
+        	//document.getElementById("td").value = "time remianing : " + h+":"+m+":"+s;
+
+
+            var countDownDate = new Date(startday).getTime();
+            // Update the count down every 1 second
+            var x = setInterval(function() {
+              // Get today's date and time
+              var now = new Date().getTime();
+              // Find the distance between now and the count down date
+              var distance = countDownDate - now;
+              // Time calculations for days, hours, minutes and seconds
+              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                
+              // Output the result in an element with id="demo"
+              document.getElementById("td").value = days + "d " + hours + "h "
+              + minutes + "m " + seconds + "s ";
+                
+              // If the count down is over, write some text 
+              if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("td").value = "Test Started";
+              }
+            }, 1000);
+
+
+
+
+        	setTimeout(function(){  
+                    var element = document.getElementById("start") ;
+                    element.disabled = false;
+                }, msec);
+
+            }
+    }
+}
+    </script>
+        	

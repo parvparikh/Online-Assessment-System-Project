@@ -1,0 +1,297 @@
+<HTML>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+input[type=text]{
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+input[type=number]{
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+}
+select,option {
+width: 50%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+font-size: 20px;
+}
+
+input[type=submit] {
+width: 50%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+input[type=submit]:hover {
+background-color: #45a049;
+}
+
+div {
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 20px;
+}
+#customers {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 50%;
+}
+
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px; 
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+</style>
+</head>
+<BODY>
+<center>
+<form method="POST" action="">
+ 
+    <center>
+      <a href="/logout">logout</a>
+      <a href="/change_t_password">Change Password</a>
+
+    </center>
+    <H1>Select Courses For Question Bank</H1> <br>
+    <button> <a href="/cquizbutton">Create Quiz</a></button>
+    <button> <a href="/viewreport">View Results</a></button>
+     <button> <a href="/auto_test">Auto Test</a></button><br>
+
+
+    <select name="course" id="course">
+    {% for row in courses %}
+  	<option value={{row.0}} >{{row.0}}</option>
+
+  	{% endfor %}
+	</select>
+	<p>{{c}}</p>
+
+
+    <input type = "submit" name="course" value="Search Question Bank">
+    </form>
+ <br>
+ <table border="1" width="70%" id = 'customers'>
+
+{% for row in ques1 %}
+<tr>
+  <th colspan="3">MCQ</th>
+</tr>
+<tr>
+	<th colspan="2">Que {{row.0}}: {{row.4}}</th>
+	<th width="10%">( {{row.3}} )</th>
+</tr>
+<tr>
+	<td>A) {{row.6}}</td>
+	<td>B) {{row.7}}</td>
+  <td rowspan="2" width="10%">[ {{row.12}} ]</td>
+</tr><tr>
+	<td>C) {{row.8}}</td>
+	<td>D) {{row.9}}</td>
+</tr>
+<tr>
+	<td colspan="3">ans {{row.0}}: {{row.11}}</td>
+</tr>
+{% endfor %}
+
+
+
+{% for row in ques2 %}
+<tr>
+  <th colspan="3">MSQ</th>
+</tr>
+<tr>
+  <th colspan="2">Que {{row.0}}: {{row.4}}</th>
+  <th>( {{row.3}} )</th>
+</tr>
+<tr>
+  <td>A) {{row.6}}</td>
+  <td>B) {{row.7}}</td>
+  <td rowspan="2">[ {{row.12}} ]</td>
+</tr><tr>
+  <td>C) {{row.8}}</td>
+  <td>D) {{row.9}}</td>
+</tr>
+<tr>
+  <td colspan="3">ans {{row.0}}: {{row.10}}</td>
+</tr>
+{% endfor %}
+
+
+
+{% for row in ques3 %}
+<tr>
+  <th colspan="3">One Word</th>
+</tr>
+<tr>
+  <th colspan="2">Que {{row.0}}: {{row.4}}</th>
+  <th>( {{row.3}} )</th>
+</tr>
+<tr>
+  <td colspan="2">ans {{row.0}}: {{row.10}}</td>
+  <td>[ {{row.12}} ]</td>
+</tr>
+{% endfor %}
+
+
+ 	
+ </table>
+ 
+<div border="1">
+<form method="POST" action="">
+    
+ 
+   <table border="1" id='customers'>
+<tr>
+	<th colspan="2">MCQ  : <input type = "text" name= "q" /></th>
+	
+</tr>
+<tr>
+	<td>A) <input type = "text" name = "op1" /></td>
+	<td>B) <input type = "text" name = "op2" /></td>
+</tr><tr>
+	<td>C) <input type = "text" name = "op3" /></td>
+	<td>D) <input type = "text" name = "op4" /></td>
+</tr>
+<tr>
+	<td>ans : <input type = "text" name = "ans" /></td>
+	<td>marks : <input type = "number" name= "marks" /> </td>
+</tr>
+<tr>
+	<td><input type = "submit" value="Add Question" name = "add_que_type1" /></td>
+  <td>
+    Blooms  Taxonomy :  <select name="bt" id="bt">
+    <option value="NA" >Choose one</option>
+    <option value="A" >Apply</option>
+    <option value="C" >Create</option>
+    <option value="E" >Evaluate</option>
+    <option value="N" >Analyse </option>
+    <option value="R" >Remember </option>
+    <option value="U" >Understand </option>
+  </select>
+  </td>
+</tr>
+ 	
+ </table>
+
+
+</form>
+</div>
+
+
+<div border="1">
+<form method="POST" action="">
+    
+ 
+   <table border="1" id='customers'>
+<tr>
+  <th colspan="2">MSQ : <input type = "text" name= "q" /></th>
+  
+</tr>
+<tr>
+  <td>A) <input type = "text" name = "op1" /></td>
+  <td>B) <input type = "text" name = "op2" /></td>
+</tr><tr>
+  <td>C) <input type = "text" name = "op3" /></td>
+  <td>D) <input type = "text" name = "op4" /></td>
+</tr>
+<tr>
+  <td>ans : <input type = "text" name = "ans" /></td>
+  <td>marks : <input type = "number" name= "marks" /> </td>
+</tr>
+<tr>
+  <td><input type = "submit" value="Add Question" name = "add_que_type2" /></td>
+  <td>
+    Blooms  Taxonomy :  <select name="bt" id="bt">
+    <option value="NA" >Choose one</option>
+    <option value="A" >Apply</option>
+    <option value="C" >Create</option>
+    <option value="E" >Evaluate</option>
+    <option value="N" >Analyse </option>
+    <option value="R" >Remember </option>
+    <option value="U" >Understand </option>
+  </select>
+  </td>
+</tr>
+  
+ </table>
+
+
+</form>
+</div>
+
+
+
+<div border="1">
+<form method="POST" action="">
+    
+ 
+   <table border="1" id='customers'>
+<tr>
+  <th colspan="2">OWAQ : <input type = "text" name= "q" /></th>
+  
+</tr>
+<tr>
+  <td>ans : <input type = "text" name = "ans" /></td>
+  <td>marks : <input type = "number" name= "marks" /> </td>
+</tr>
+<tr>
+  <td><input type = "submit" value="Add Question" name = "add_que_type3" /></td>
+  <td>
+    Blooms  Taxonomy :  <select name="bt" id="bt">
+    <option value="NA" >Choose one</option>
+    <option value="A" >Apply</option>
+    <option value="C" >Create</option>
+    <option value="E" >Evaluate</option>
+    <option value="N" >Analyse </option>
+    <option value="R" >Remember </option>
+    <option value="U" >Understand </option>
+  </select>
+  </td>
+</tr>
+  
+ </table>
+
+
+</form>
+</div>
+
+
+
+
+</center>
+</table>
+</center>
+</BODY>
+</HTML>

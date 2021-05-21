@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test Page</title>
+  
+      <style>
+          /* (A) WRAPPER */
+#numWrap {
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 999;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s;
+}
+#numWrap.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* (B) NUMPAD */
+#numPad {
+  max-width: 350px;
+  background: #151515;
+  margin: 50vh auto 0 auto;
+  transform: translateY(-50%);
+  padding: 10px;
+}
+
+/* (C) DISPLAY */
+#numDisplay {
+  box-sizing: border-box;
+  width: 100%;
+  border: 0;
+  padding: 5px;
+  margin-bottom: 10px;
+  background: #000;
+  color: #fff;
+  font-size: 42px;
+  text-align: right;
+}
+#numDisplay:focus { outline: none; }
+#numDisplay::selection { background: none; }
+
+/* (D) BUTTONS WRAPPER */
+#numBWrap {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto auto auto auto auto auto;
+  grid-gap: 5px;
+}
+
+/* (E) BUTTONS */
+#numBWrap div {
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  padding: 15px 0;
+}
+#numBWrap div:hover { cursor: pointer; }
+#numBWrap .num, #numBWrap .zero, #numBWrap .dot,#numBWrap .char { background: #565656; }
+#numBWrap .cx { grid-column: span 5; }
+#numBWrap .ok { grid-column: span 5; }
+#numBWrap .del, #numBWrap .clr { background: #333; }
+#numBWrap .cx { background: #940909; }
+#numBWrap .ok { background: #115296; }
+#numBWrap .del { grid-column: span 5;
+}
+#numBWrap .clr { grid-column: span 5; }
+#numBWrap .dot { grid-column: span 2; }
+
+/* No decimal points allowed */
+#numBWrap.noDec .dot { display: none; }
+#numBWrap.noDec .cx { grid-column: span 3; }
+#numBWrap.noDec .ok { grid-column: span 3; }
+          #a{
+              display: none;
+          }
+      </style>
+</head>
+<body oncopy="return false" oncut="return false" onpaste="return false" draggable="false">
+  <table border="1">
+<tr>
+<td>OUT OF THIS WINDOW</td><td><text id="name">0</text> </td>
+</tr>
+
+<br><br><tr>
+<td>OUT OF FOCUS </td><td><text id="focus">0</text> </td>
+</tr>
+<tr><td>
+OUT OF FULL SCREEN </td><td><text id="ft">0</text> </td></tr>
+your screen is <text id="fs">not in</text> Full screen mode.
+<br><br>
+</table>
+<script>
+ 
+     window.addEventListener("load", function(){
+            // BASIC
+            numpad.attach({target: "demoA"});
+      
+      
+        });
+        
+
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+
+    function onBlur() {
+      var f = document.getElementById("focus").innerHTML;
+      f=parseInt(f);
+      f=f+1;
+      document.getElementById("focus").innerHTML = f;
+      document.getElementById("fc2").value = f;
+      document.getElementById("fc3").value = f;
+    };
+    function onFocus(){
+      //document.getElementById("focus").innerHTML = 'focused';
+    };
+
+    if (/*@cc_on!@*/false) { // check for Internet Explorer
+      document.onfocusin = onFocus;
+      document.onfocusout = onBlur;
+    } else {
+      window.onfocus = onFocus;
+      window.onblur = onBlur;
+    }
+
+
+  window.onload = function(){
+
+  var x= document.getElementById("ct2").value;
+  var y= document.getElementById("fs2").value;
+  var z= document.getElementById("fc2").value;
+  document.getElementById("name").innerHTML = x;
+  document.getElementById("ft").innerHTML = y;
+  document.getElementById("focus").innerHTML = z;
+
+}
+  document.addEventListener("dblclick",()  => {
+
+  document.documentElement.requestFullscreen().catch((e) => { console.log(e);});
+
+  });
+
+document.addEventListener('visibilitychange', function () {
+  // The user leaves the current page.
+  if (document.visibilityState === 'hidden') {
+    var txt= document.getElementById("name").innerHTML;
+    t=parseInt(txt)
+    t=t+1;
+    document.getElementById("name").innerHTML = t;
+    document.getElementById("ct2").value = t;
+    document.getElementById("ct3").value = t;
+
+  }
+
+}); 
+document.addEventListener('fullscreenchange', (event) => {
+
+  if (document.fullscreenElement) {
+    document.getElementById("fs").innerHTML = "in";
+    //document.getElementById("save").disabled = false;
+    console.log(`Element: ${document.fullscreenElement.id} entered full-screen mode.`);
+  } else {
+
+    document.documentElement.requestFullscreen().catch((e) => { console.log(e);});
+
+    document.getElementById("fs").innerHTML = "not in";
+    //document.getElementById("save").disabled = true;
+    var txt= document.getElementById("ft").innerHTML;
+    t=parseInt(txt)
+    t=t+1;
+    document.getElementById("ft").innerHTML = t;
+     document.getElementById("fs2").value = t;
+    document.getElementById("fs3").value = t;
+    console.log('Leaving full-screen mode.');
+
+  }
+});
+
+
+</script>
+
+<center><h1>Welcome to The Test</h1>
+<form method="POST" id="endtest" name="endtest" action="" >
+  <table border="1" padding='0'>
+    <tr>
+      <th>
+  <input type ="submit" name="EndTest" id="EndTest" value="End Test"></th>
+  <th><p id="demo"> </p></th>
+    </tr>
+  </table>
+</form>
+ <table border="1" width="100%" id = 'customers'>
+    
+          
+<tr>
+  
+  <th>Test Name</th>
+  <th>Test Marks</th>
+  <th>Test Date</th>
+  <th>Start and End Time</th>
+  <th>Test Time</th>
+</tr>
+{% for row in data %}
+  
+    <tr>
+      <th>{{row.3}}</th>
+      <th>{{row.5}}</th>
+      <th><input hidden="true" id="date" value="{{row.6}}">{{row.6}}</th>
+      <th><input hidden="true" id="etime" value="{{row.8}}">{{row.7}} to {{row.8}}</th>
+      <th>{{row.9}}</th>
+    </tr>
+  
+
+{% endfor %}
+
+
+        </table>
+
+        <br><br><br>
+<form method="POST" action="">
+  <input type="hidden" name="ct2" id="ct2" value="{{ct}}">
+  <input type="hidden" name="fs2" id="fs2" value="{{fs}}">
+  <input type="hidden" name="fc2" id="fc2" value="{{fc}}">
+  {% for i in saved %}
+  <input type="hidden" name="saved" id="saved" value="{{i}}">
+  {% endfor %}
+
+{% for i in ids %}
+<button type = "submit" name="select" value="{{i}}">{{i}}</button> 
+{% endfor %}
+
+
+<script type="text/javascript">
+   /*window.onload = function(){
+
+  var saved = document.getElementById("saved").value;
+  var select = document.getElementsByName("select");
+  select.style.backgroundColor = "green";
+  
+
+}*/
+</script>
+
+
+</form>
+<br><br><br>
+
+<form method="POST" action="">
+  <input type="hidden" name="ct3" id="ct3" value="{{ct}}">
+  <input type="hidden" name="fs3" id="fs3" value="{{fs}}">
+  <input type="hidden" name="fc3" id="fc3" value="{{fc}}">
+ <table border="1" width="50%" id = 'customers'>
+
+
+{% if row.5 == 1 %}
+<tr>
+  <th colspan="2">Que {{row.13}}: {{row.4}}</th>
+  <th width="10%">( {{row.3}} ) [{{row.12}}]</th>
+</tr>
+
+
+<tr>
+  <td>A) <input type="radio" id="optA" name="option" value="1"> {{row.6}}</td>
+  <td>B) <input type="radio" id="optB" name="option" value="2"> {{row.7}}</td>
+  </tr>
+  <tr>
+  <td>C) <input type="radio" id="optC" name="option" value="3"> {{row.8}}</td>
+  <td>D) <input type="radio" id="optD" name="option" value="4"> {{row.9}}</td>
+</tr>
+{% endif %}
+
+
+{% if row.5 == 2 %}
+<tr>
+  <th colspan="2">Que {{row.13}}: {{row.4}}</th>
+  <th width="10%">( {{row.3}} ) [{{row.12}}]</th>
+</tr>
+
+
+<tr>
+  <td>A) <input type="checkbox" id="ckbA" name="optionck" value="1"> {{row.6}}</td>
+  <td>B) <input type="checkbox" id="ckbB" name="optionck" value="2"> {{row.7}}</td>
+  </tr>
+  <tr>
+  <td>C) <input type="checkbox" id="ckbC" name="optionck" value="3"> {{row.8}}</td>
+  <td>D) <input type="checkbox" id="ckbD" name="optionck" value="4"> {{row.9}}</td>
+</tr>
+{% endif %}
+
+{% if row.5 == 3 %}
+<tr>
+  <th colspan="2">Que {{row.13}}: {{row.4}}</th>
+  <th width="10%">( {{row.3}} ) [{{row.12}}]</th>
+</tr>
+
+
+<tr>
+  <td>Ans : <input type="text" id="demoA" name="demoA"></td>
+</tr>
+{% endif %}
+
+  
+ </table>
+ 
+  <input hidden="true" value="{{row.13}}" id="hidden">
+ <input type="text" name="type" value="{{row.5}}" id="type" hidden="true">
+  <input type="text" value="{{pre}}" id="pre" hidden="true">
+  <button type = "submit" name="save" id="save" value="{{row.13}} 0" onclick="update()">save & next</button> 
+</form>
+
+<script type="text/javascript">
+var type = document.getElementById('type').value;
+ 
+    if( type == 1)
+    {
+        var y = document.getElementById("pre").value;
+        var yi = parseInt(y);
+        switch(yi)
+        {
+          case 1:
+          document.getElementById('optA').checked = true;
+          break;
+
+          case 2:
+          document.getElementById('optB').checked = true;
+          break;
+
+          case 3:
+          document.getElementById('optC').checked = true;
+          break;
+
+          case 4:
+          document.getElementById('optD').checked = true;
+          break;
+         }
+      }else if( type == 2){
+
+          var y = document.getElementById("pre").value;
+          y=y.substring(1);
+          y = String(y);
+          //alert(y);
+          var op = y.split(",");
+          //alert(op);
+          //alert(op[0]);
+          //alert(op[1]);
+          for(i in y)
+          {
+            switch(parseInt(op[i]))
+            {
+              case 1:
+              document.getElementById('ckbA').checked = true;
+              break;
+
+              case 2:
+              document.getElementById('ckbB').checked = true;
+              break;
+
+              case 3:
+              document.getElementById('ckbC').checked = true;
+              break;
+
+              case 4:
+              document.getElementById('ckbD').checked = true;
+              break;
+             }
+          }
+
+      }else if(type == 3){
+        var y = document.getElementById("pre").value;
+        document.getElementById('demoA').value = y;
+      }
+
+  function update() {
+    var type = document.getElementById('type').value;
+    //alert(type);
+    //alert("you are in update");
+    if( type == 1)
+    {
+      //alert("you are in update type 1");
+       var ele = document.getElementsByName('option');
+        //alert(ele); 
+            for(i = 0; i < ele.length; i++) {
+              //alert("you are in outside if");
+                if(ele[i].checked)
+                {
+                var x = document.getElementById("hidden").value;
+
+                x = x + " " + ele[i].value;
+                document.getElementById("save").value = x;
+                //alert("you are in update type 1 updated");
+                }
+            }
+    }else if(type == 2)
+    {
+      //alert("you are in update type 2");
+      var ckba = document.getElementById('ckbA');
+      var ckbb = document.getElementById('ckbB');
+      var ckbc = document.getElementById('ckbC');
+      var ckbd = document.getElementById('ckbD');
+      var str=""
+
+      if(ckba.checked)
+        str=str+",1";
+      if(ckbb.checked)
+        str=str+",2";
+      if(ckbc.checked)
+        str=str+",3";
+      if(ckbd.checked)
+        str=str+",4";
+      var x = document.getElementById("hidden").value;
+      x = x + " " + str;
+      document.getElementById("save").value = x;
+      //alert("you are in update type 2 updated");
+    }else if(type == 3)
+    {
+      //alert("you are in update type 3");
+        var ele = document.getElementById('demoA').value;
+        var x = document.getElementById("hidden").value;
+        x = x + " " + ele;
+        document.getElementById("save").value = x;
+      
+    }
+  }
+</script>
+ 
+<br><br><br>
+
+
+
+<script>
+
+
+var time = document.getElementById("date").value;
+var t = time.split('-');
+var t1 = t[2].split(' ');
+t[1] = String(t[1]);
+switch(t[1])
+{
+  case "01":
+  t[1] = "Jan";
+  break;
+  case "02":
+  t[1] = "Feb";
+  break;
+  case "03":
+  t[1] = "Mar";
+  break;
+  case "04":
+  t[1] = "Apr";
+  break;
+  case "05":
+  t[1] = "May";
+  break;
+  case "06":
+  t[1] = "Jun";
+  break;
+  case "07":
+  t[1] = "Jul";
+  break;
+  case "08":
+  t[1] = "Aug";
+  break;
+  case "09":
+  t[1] = "Sep";
+  break;
+  case "10":
+  t[1] = "Oct";
+  break;
+  case "11":
+  t[1] = "Nov";
+  break;
+  case "12":
+  t[1] = "Dec";
+  break;
+  
+}
+var et = document.getElementById("etime").value;
+time = t[1] +" "+ t1[0] + " , " + t[0] + " " + et;
+time = String(time);
+time =time + ":00"
+var countDownDate = new Date(time).getTime();
+
+ 
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+
+  // Get today's date and time
+  var now = new Date().getTime();
+    
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+    
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+  // Output the result in an element with id="demo"
+  document.getElementById("demo").innerHTML = hours + "h "
+  + minutes + "m " + seconds + "s ";
+    
+  // If the count down is over, write some text 
+  if (distance < 0) {
+
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+    //alert('test ended');
+    //document.endtest.submit();
+  }
+}, 1000);
+</script>
+
+
+
+
+
+
+
+
+
+
+      </center>  
+
+
+
+
+<script type="text/javascript">
+  
+var numpad = {
+  // (A) CREATE NUMPAD HTML
+  hwrap: null, // numpad wrapper container
+  hpad: null, // numpad itself
+  hdisplay: null, // number display
+  hbwrap: null, // buttons wrapper
+  hbuttons: {}, // individual buttons
+  init: function(){
+    // (A1) WRAPPER
+    numpad.hwrap = document.createElement("div");
+    numpad.hwrap.id = "numWrap";
+
+    // (A2) ENTIRE NUMPAD ITSELF
+    numpad.hpad = document.createElement("div");
+    numpad.hpad.id = "numPad";
+    numpad.hwrap.appendChild(numpad.hpad);
+    
+    // (A3) DISPLAY
+    numpad.hdisplay = document.createElement("input");
+    numpad.hdisplay.id = "numDisplay";
+    numpad.hdisplay.type = "text";
+    numpad.hdisplay.disabled = true;
+    numpad.hdisplay.value = "";
+    numpad.hpad.appendChild(numpad.hdisplay);
+
+    // (A4) NUMBER BUTTONS
+    numpad.hbwrap = document.createElement("div");
+    numpad.hbwrap.id = "numBWrap";
+    numpad.hpad.appendChild(numpad.hbwrap);
+
+    // (A5) BUTTONS
+    let buttonator = function (txt, css, fn) {
+      let button = document.createElement("div");
+      button.innerHTML = txt;
+      button.classList.add(css);
+      button.addEventListener("click", fn);
+      numpad.hbwrap.appendChild(button);
+      numpad.hbuttons[txt] = button;
+    };
+    // 7 to 9
+    for (let i=0; i<=9; i++) { buttonator(i, "num", numpad.digit); }
+    for (let i=97; i<=122; i++) { buttonator(String.fromCharCode(i), "char", numpad.char); }
+    // Backspace
+      buttonator("-", "dot", numpad.minus);
+      buttonator(".", "dot", numpad.dot);
+    buttonator("&#10502;", "del", numpad.delete);
+    // 4 to 6
+    
+    // Clear
+    buttonator("C", "clr", numpad.reset);
+    // 1 to 3
+    
+    // Cancel
+    buttonator("&#10006;", "cx", numpad.hide);
+    // 0
+    
+    // .
+    
+    
+    // OK
+    buttonator("&#10004;", "ok", numpad.select);
+
+    // (A6) ATTACH NUMPAD TO HTML BODY
+    document.body.appendChild(numpad.hwrap);
+  },
+
+  // (B) BUTTON ACTIONS
+  // (B1) CURRENTLY SELECTED FIELD + MAX LIMIT
+  nowTarget: null, // Current selected input field
+  nowMax: 0, // Current max allowed digits
+  
+  // (B2) NUMBER (0 TO 9)
+
+  digit: function(){
+    let current = numpad.hdisplay.value,
+        append = this.innerHTML;
+    if (current.length < numpad.nowMax) {
+      if (current=="0") {
+        numpad.hdisplay.value = append;
+      } else {
+        numpad.hdisplay.value += append;
+      }
+    }
+  },
+minus: function(){
+    let current = numpad.hdisplay.value,
+        append = this.innerHTML;
+    
+        
+      
+        numpad.hdisplay.value += append;
+      
+    
+  },
+char: function(){
+    let current = numpad.hdisplay.value,
+        append = this.innerHTML;
+    
+        
+      
+        numpad.hdisplay.value += append;
+      
+    
+  },
+
+  // (B3) ADD DECIMAL POINT
+  dot: function(){
+    if (numpad.hdisplay.value.indexOf(".") == -1) {
+      if (numpad.hdisplay.value=="0") {
+        numpad.hdisplay.value = "0.";
+      } else {
+        numpad.hdisplay.value += ".";
+      }
+    }
+  },
+
+  // (B4) BACKSPACE
+  delete: function(){
+    var length = numpad.hdisplay.value.length;
+    if (length == 1) { numpad.hdisplay.value = ""; }
+    else { numpad.hdisplay.value = numpad.hdisplay.value.substring(0, length - 1); }
+  },
+
+  // (B5) CLEAR ALL
+  reset: function(){ numpad.hdisplay.value = ""; },
+
+  // (B6) OK - SET VALUE
+  select: function(){
+    numpad.nowTarget.value = numpad.hdisplay.value;
+    numpad.hide();
+  },
+
+  // (C) ATTACH NUMPAD TO INPUT FIELD
+  attach: function(opt){
+  // OPTIONS
+  //  target: required, ID of target field.
+  //  max: optional, maximum number of characters. Default 255.
+  //  decimal: optional, allow decimal? Default true.
+
+    // (C1) DEFAULT OPTIONS
+    if (opt.max === undefined) { opt.max = 255; }
+    if (opt.decimal === undefined) { opt.decimal = true; }
+    
+    // (C2) GET + SET TARGET OPTIONS
+    let target = document.getElementById(opt.target);
+    target.readOnly = true;
+    target.dataset.max = opt.max;
+    target.dataset.decimal = opt.decimal;
+    target.addEventListener("click", numpad.show);
+  },
+
+  // (D) SHOW NUMPAD
+  show: function() {
+    // (D1) SET CURRENT DISPLAY VALUE
+    let cv = this.value;
+    if (cv == "") { cv = ""; }
+    numpad.hdisplay.value = cv;
+
+    // (D2) SET MAX ALLOWED CHARACTERS
+    numpad.nowMax = this.dataset.max;
+
+    // (D3) SET DECIMAL
+    if (this.dataset.decimal == "true") {
+      numpad.hbwrap.classList.remove("noDec");
+    } else {
+      numpad.hbwrap.classList.add("noDec");
+    }
+
+    // (D4) SET CURRENT TARGET
+    numpad.nowTarget = this;
+
+    // (D5) SHOW NUMPAD
+    numpad.hwrap.classList.add("open"); 
+  },
+
+  // (E) HIDE NUMPAD
+  hide: function(){ numpad.hwrap.classList.remove("open"); },
+};
+window.addEventListener("DOMContentLoaded", numpad.init);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Page</title>
+</head>
+<body>
+<center><h1>Welcome to The Test</h1></center>
+<center>
+      <a href="/studentdashboard">Dashboard</a>
+    </center>
+ <table border="1" width="100%" id = 'customers'>
+
+
+<form method="POST" action="">
+	
+	<button type = "submit" name="Start Test" id="start" value="Start Test" disabled="true">Start Test</button> 
+	<input type="text" name="today" id="td" width="100%" readonly="true">
+</form>
+<input hidden="true" id="m" value="{{marks}}">
+
+<script type="text/javascript">
+    	window.onload = function(){
+
+
+    	document.getElementById("start").disabled = true;
+    	var marks = document.getElementById("m").value;
+    	if(marks < 0)
+    	{
+	    	var date = document.getElementById("date").value;
+	    	var time = document.getElementById("stime").value;
+	    	var etime = document.getElementById("etime").value;
+	    	var startday = new Date(date);
+	    	time=time.split(':');
+	    	startday.setHours(time[0]);
+	    	startday.setMinutes(time[1]);
+	    	startday.setSeconds(time[2]);
+
+	    	
+
+	    	var endday = new Date(date);
+	    	etime=etime.split(':');
+	    	endday.setHours(etime[0]);
+	    	endday.setMinutes(etime[1]);
+	    	endday.setSeconds(etime[2]);
+
+
+	    	var today = new Date();
+	    	var check = (today.getTime() - endday.getTime()) / 1000;
+
+	    	if(check>=0)
+	        {
+
+	                document.getElementById("td").value = "Test Time Ended";
+	        }
+	    	else
+	    	{
+		    	var diff =(startday.getTime() - today.getTime()) / 1000;
+
+		    	if(diff < 0)
+		    	{
+		    		document.getElementById("td").value = "ALready Started";
+
+		    		setTimeout(function(){  
+		       		 var element = document.getElementById("start") ;
+		       			 element.disabled = false;
+		   				 }, 0);
+		    	}
+		    	else{
+		  		//diff /= 60;
+		  		var ans = Math.abs(Math.round(diff))
+		  		var m=ans/60;
+				m=parseInt(m);
+				var s=ans - (60*m);
+				var h=m/60;
+				h=parseInt(h);
+				var m=m - (60*h);
+		    	
+		    	msec = ans*1000;
+		    	//h+" hrs "+m+" mins" +  
+		    	//document.getElementById("td").value = "time remianing : " + h+":"+m+":"+s;
+
+		    	var countDownDate = new Date(startday).getTime();
+	            // Update the count down every 1 second
+	            var x = setInterval(function() {
+	              // Get today's date and time
+	              var now = new Date().getTime();
+	              // Find the distance between now and the count down date
+	              var distance = countDownDate - now;
+	              // Time calculations for days, hours, minutes and seconds
+	              var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+	              var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+	              var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	              var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	                
+	              // Output the result in an element with id="demo"
+	              document.getElementById("td").value = days + "d " + hours + "h "
+	              + minutes + "m " + seconds + "s ";
+	                
+	              // If the count down is over, write some text 
+	              if (distance < 0) {
+	                clearInterval(x);
+	                document.getElementById("td").value = "Test Started";
+	              }
+	            }, 1000);
+
+
+		    	setTimeout(function(){  
+		        var element = document.getElementById("start") ;
+		        element.disabled = false;
+		    }, msec);
+
+		    }
+		}
+	}
+
+	else{
+
+			//document.getElementById("marks").hidden = false;
+			document.getElementById("marks").innerHTML = marks;
+	}
+
+}
+
+    </script>
+
+
+
+
+<tr>
+	
+	<th>Test Name</th>
+	<th>Test Marks</th>
+	<th>Test Date</th>
+	<th>Start and End Time</th>
+	<th>Test Time</th>
+</tr>
+{% for row in data %}
+	
+		<tr>
+			<th>{{row.3}}</th>
+			<th>{{row.5}}</th>
+			<th><input hidden="true" id="date" value="{{row.6}}">{{row.6}}</th>
+			<th><input hidden="true" id="stime" value="{{row.7}}">{{row.7}} to {{row.8}}</th>
+			<input hidden="true" id="etime" value="{{row.8}}">
+			<th>{{row.9}}</th>
+		</tr>
+	
+
+{% endfor %}
+
+
+        </table>
+<center>
+<table border="1">
+	
+<tr>
+	{% for row in data %}
+	<th>Marks</th>
+	<th><p name="marks" id="marks"></p>/{{row.5}}</th>
+
+	{% endfor %}
+</tr>
+</table>
+</center>
+
+<center><h1>Instructions</h1></center>
+
+(1) To answer a question, do the following; <br>
+
+(2) Click on the question number in the Question Palette to go to that question directly.<br>
+
+(3) <ul><li>Select an answer for a multiple-choice type question (MCQs) by clicking on bubble placed before the 4 choices A, B, C, D.</li> 
+   <li> Use the virtual numeric keypad to cetera number as an answer to a one word answer type questions (OWAQs). </li>
+   <li>Select Multple options for multiple-select type question (MSQs) by clicking on check box placed before the 4 choices A, B, C, D.</li></ul> <br>
+
+(4) Click on Save and Next to save your answer for the current question and then go to the next question. <br>
+
+Caution: Note that your answer for the current question will not be saved, if you navigate to another question directly by clicking on its question number. <br>
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	document.addEventListener("dblclick",()  => {
+
+	document.documentElement.requestFullscreen().catch((e) => { console.log(e);});
+
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Test Page</title>
+<style type="text/css">
+	table{
+		border-collapse: collapse;
+	}
+
+</style>
+</head>
+<body>
+<center><h1>Test Results</h1></center>
+<center>
+      <a href="/studentdashboard">Dashboard</a>
+    </center>
+
+
+ <table border="1" width="100%" id = 'customers'>
+
+
+
+<input hidden="true" id="m" value="{{marks}}">
+
+
+
+<tr>
+	
+	<th>Test Name</th>
+	<th>Test Marks</th>
+	<th>Test Date</th>
+	<th>Start and End Time</th>
+	<th>Test Time</th>
+</tr>
+{% for row in data %}
+	
+		<tr>
+			<th>{{row.3}}</th>
+			<th>{{row.5}}</th>
+			<th><input hidden="true" id="date" value="{{row.6}}">{{row.6}}</th>
+			<th><input hidden="true" id="stime" value="{{row.7}}">{{row.7}} to {{row.8}}</th>
+			<input hidden="true" id="etime" value="{{row.8}}">
+			<th>{{row.9}}</th>
+		</tr>
+	
+
+{% endfor %}
+
+
+        </table><br>
+<center>
+<table border="1">
+	
+<tr>
+	{% for row in data %}
+	<th>Marks</th>
+	<th><label name="marks" id="marks"></label>{{marks}}/{{row.5}}</th>
+
+	{% endfor %}
+</tr>
+</table>
+<p id="hello"></p>
+<br>
+<form action="" method="post" id="my-form">
+    
+<table border="1">
+{% for row in ques12 %}
+<tr id="{{row.2}}">
+  <th colspan="2" ><input id="{{row.2}}0" value="{{row.4}}"   hidden="true">{{row.8}}</th>
+  <th  style="color: white;">( {{row.4}}/{{row.6}} )</th>
+</tr>
+
+
+<tr>
+  <td>A)  {{row.10}}</td>
+  <td>B)  {{row.11}}</td>
+  </tr>
+  <tr>
+  <td>C)  {{row.12}}</td>
+  <td>D)  {{row.13}}</td>
+</tr>
+
+<tr>
+  <td colspan="2">Your Ans :  {{row.3}}</td>
+  </tr>
+  <tr>
+  <td colspan="2">Right Ans : {{row.5}}</td>
+</tr>
+{% endfor %}
+
+
+{% for row in ques3 %}
+<tr id="{{row.2}}">
+  <th colspan="2"   style="color: white;"><input id="{{row.2}}0" value="{{row.4}}"   hidden="true">{{row.8}}</th>
+  <th  style="color: white;" >( {{row.4}}/{{row.6}} )</th>
+</tr>
+
+<tr>
+  <td colspan="2">Your Ans :  {{row.3}}</td>
+  </tr>
+  <tr>
+  <td colspan="2">Right Ans : {{row.5}}</td>
+</tr>
+{% endfor %}
+</table>
+</form>
+</center>
+
+
+
+
+
+
+
+
+
+
+<script>
+    var x="";
+	document.addEventListener("dblclick",()  => {
+
+	document.documentElement.requestFullscreen().catch((e) => { console.log(e);});
+
+	});
+    
+    var elements = document.getElementById("my-form").elements;
+
+for (var i = 0, element; element = elements[i++];) {
+    x=element.id;
+    x = x.substring(0, x.length - 1);
+    y=element.value;
+    if(y== "0"){
+        document.getElementById(x).style.backgroundColor = 'Red';
+        document.getElementById(x).style.color = 'White';
+    }else{
+        document.getElementById(x).style.backgroundColor = "#4CAF50";
+        document.getElementById(x).style.color = 'White';
+    }
+    
+}
+    
+</script>
+</body>
+</html>

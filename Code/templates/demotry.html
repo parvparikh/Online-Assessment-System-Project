@@ -1,0 +1,77 @@
+<form method="POST" action="">
+	
+	<button type = "submit" name="Start Test" id="start" value="Start Test" disabled="true">Start Test</button> 
+
+</form>
+<table>
+	<tr>
+<th><input id="date" value="2021-04-11"></th>
+<th><input id="stime" value="15:46:00"></th></tr>
+</table>
+heerer<input type="text" name="today" id="td" width="100%">
+
+
+
+    <script type="text/javascript">
+
+		function onBlur() {
+			document.getElementById("td").value = 'blurred';
+		};
+		function onFocus(){
+			document.getElementById("td").value = 'focused';
+		};
+
+		if (/*@cc_on!@*/false) { // check for Internet Explorer
+			document.onfocusin = onFocus;
+			document.onfocusout = onBlur;
+		} else {
+			window.onfocus = onFocus;
+			window.onblur = onBlur;
+		}
+    	window.onload = function(){
+
+    	document.getElementById("start").disabled = true;
+
+    	var date = document.getElementById("date").value;
+    	var time = document.getElementById("stime").value;
+    	var startday = new Date(date);
+    	time=time.split(':');
+    	startday.setHours(time[0]);
+    	startday.setMinutes(time[1]);
+    	startday.setSeconds(time[2]);
+
+    	var today = new Date();
+
+    	var diff =(startday.getTime() - today.getTime()) / 1000;
+    	if(diff < 0)
+    	{
+    		document.getElementById("td").value = "ALready Started";
+
+    		setTimeout(function(){  
+       		 var element = document.getElementById("start") ;
+       			 element.disabled = false;
+   				 }, 0);
+    	}
+    	else{
+  		//diff /= 60;
+  		var ans = Math.abs(Math.round(diff))
+  		var m=ans/60;
+		m=parseInt(m);
+		var s=ans - (60*m);
+		var h=m/60;
+		h=parseInt(h);
+		var m=m - (60*h);
+    	
+    	msec = ans*1000;
+    	//h+" hrs "+m+" mins" +  
+    	document.getElementById("td").value = "time remianing : " + h+":"+m+":"+s;
+    	setTimeout(function(){  
+        var element = document.getElementById("start") ;
+        element.disabled = false;
+    }, msec);
+
+    }
+}
+
+    </script>
+        	

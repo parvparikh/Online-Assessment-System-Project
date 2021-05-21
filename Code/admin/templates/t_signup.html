@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial, Helvetica, sans-serif;
+    height: 50%;}
+form {border: 3px solid #f1f1f1;
+    width:50%;
+    height:50%;
+    margin:auto;}
+
+ 
+
+input[type=text], input[type=email],input[type=password],center ,a{
+  width: 100%;
+  padding: 12px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+    center{
+        background-color: aqua;
+    }
+    }
+    input[type=submit]{   
+ width: 100%;
+  padding: 12px 10px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+}
+
+ 
+
+button:hover {
+  opacity: 0.8;
+}
+
+ 
+
+.cancelbtn {
+  width: auto;
+  padding: 10px 18px;
+  background-color: #f44336;
+}
+
+ 
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+ 
+
+img.avatar {
+  width: 40%;
+  border-radius: 50%;
+}
+
+ 
+
+.container {
+    width : 50%;
+  padding: 16px;
+    margin:auto;
+}
+
+ 
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+ 
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .cancelbtn {
+     width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+ 
+
+    <center><h2>Teacher SignUp</h2></center>
+<form method="POST" action="">
+    <div class="imgcontainer">
+     <img src="{{url_for('static', filename='img_avatar2.png')}}" alt="Avatar" class="avatar">
+    </div>
+    <div class="container">
+        
+    <label for="uname"><b>Id</b></label>
+    <input type="text" placeholder="Enter Username" name="tid" required>
+
+ 
+
+   <!-- <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="tpwd" required>-->
+      
+        
+      <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Username" name="tname" required>
+        
+        <label for="branchname"><b>Branch</b></label>
+    <input type="text" placeholder="Enter Branchname" name="tbranch" required>
+
+     <label for="email"><b>Email</b></label>
+    <input type="email" placeholder="Enter Email" name="email" required>
+        
+        
+        
+        
+    
+        <button type="submit">Submit</button>
+        <a href="/">Go To Dashboard</a>
+    <label>
+   
+  </div>
+    
+
+ 
+
+</form>
+
+ 
+
+ 
+
+ 
+
+{% with messages = get_flashed_messages() %}  
+         {% if messages %}  
+               {% for message in messages %}  
+                    
+                <script type="text/javascript">
+                    alert("{{message}}");
+                </script>
+               {% endfor %}  
+         {% endif %}  
+      {% endwith %}  
+
+ 
+
+</center>
+</table>
+</BODY>
+</HTML>
